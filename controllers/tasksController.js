@@ -37,7 +37,7 @@ async function updateTask(req, res) {
   const data = req.body;
 
   try {
-    const task = Task.findOneAndUpdate({ _id: id }, data, {
+    const task = await Task.findOneAndUpdate({ _id: id }, data, {
       new: true,
       runValidators: true,
     });
@@ -46,7 +46,7 @@ async function updateTask(req, res) {
       return res.status(404).json({ message: "couldnt find with this id" });
     }
 
-    return res.status(200).json({ success: true, data: task });
+    return res.status(200).json({ task });
   } catch (error) {
     return res.status(500).json({ error });
   }
