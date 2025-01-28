@@ -1,6 +1,7 @@
 const express = require("express");
-const tasksRouter = require("./routes/tasksRoute");
 const connectDB = require("./db/connect");
+const tasksRouter = require("./routes/tasksRoute");
+const notFound = require("./middlewares/not-found");
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +12,8 @@ app.use(express.static("./public"));
 
 // Routes
 app.use("/api/v1/tasks", tasksRouter);
+
+app.use(notFound);
 
 const port = 3000;
 
